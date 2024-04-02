@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Pagination } from '@mui/material';
+import { Table} from './components/Table/Table';
+import { useTable } from './components/Table/useTable';
+import { TextFieldRows } from './components/TextFieldRows/TextFieldRows';
+import { StyledBox } from './components/Table/styles';
 
-function App() {
+const  App = () => {
+  const { params, onChangePage } = useTable()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledBox>
+      <TextFieldRows />
+      <Table  />
+      <Pagination 
+        count={25} 
+        shape="rounded" 
+        page={parseInt(params.page, 10)} 
+        onChange={onChangePage}
+        sx={{ml: 'auto'}}
+      />
+    </StyledBox>
   );
 }
 
 export default App;
+
+
